@@ -2,21 +2,30 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #FFF2CC;
+  border: 1pt solid #D6B656;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
-.App-link {
-  color: #09d3ac;
+.RoomBox {
+  float: right;
+  background-color: #FFF2CC;
+  border: 1pt solid #D6B656;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px; 
+  width: 500px;
+  text-align: left;
+  min-height: 40vh;
+  max-height: 40vh;
+}
+
+.firebaseUi {
+  min-width: 250px;
 }

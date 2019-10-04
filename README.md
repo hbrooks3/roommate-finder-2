@@ -1,3 +1,7 @@
+Links:
+https://dev.to/bmcmahen/using-firebase-with-react-hooks-21ap
+[Form](https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

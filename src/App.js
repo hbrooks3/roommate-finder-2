@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import fire, { useFirestoreDoc, useAuth, SignInScreen } from './fire';
+// import User from './User';
+import RoomList from './Room';
+
 
 function App() {
+  // fire.auth().signInAnonymously().catch(function(err) {
+  //   console.log(err);
+  // });
+
+  const { isLoading, user } = useAuth(fire.auth());
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          Roommate Finder
+        </h1>
+        <h2>
+          Hi {user && user.displayName}
+        </h2>
+        <SignInScreen />
       </header>
+      <RoomList />
+      
     </div>
   );
 }
