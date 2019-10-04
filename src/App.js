@@ -1,30 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import fire, { useFirestoreDoc, useAuth, SignInScreen } from './fire';
-import { Card, CardActions, CardContent, Button, Typography, AppBar, Drawer, Toolbar } from '@material-ui/core';
 import RoomList from './Room';
-import { makeStyles } from '@material-ui/styles';
-import color from '@material-ui/core/colors/purple';
-
-const useStyles = makeStyles({
-  root: {
-    background: 'white',
-    color: 'yelllow'
-  },
-  card: {
-    width: '50%',
-  },
-  title: {
-    flexGrow: 1,
-    textAlign: 'center',
-  },
-});
 
 function App() {
-  // fire.auth().signInAnonymously().catch(function(err) {
-  //   console.log(err);
-  // });
-
   const { isLoading, user } = useAuth(fire.auth());
   const classes = useStyles();
 
