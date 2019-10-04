@@ -15,22 +15,14 @@
 }
 
 .RoomBox {
-  background-color: white;
+  background-color: #FFF2CC;
   border: 1pt solid #D6B656;
-  padding: 5px 5px 5px 5px;
-  margin: 5px 5px 5px 5px; 
-  width: 500px;
-  text-align: center;
-  min-height: 40vh;
-  max-height: 40vh;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
 }
 
 .firebaseUi {
   min-width: 250px;
-}
-
-.Card {
-  background: #D6B656;
 }
 
 .footer {
@@ -45,12 +37,12 @@
 
 /* Left and right column */
 .column.side {
-  width: 25%;
+  width: 30%;
 }
 
 /* Middle column */
 .column.middle {
-  width: 50%;
+  width: 70%;
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
