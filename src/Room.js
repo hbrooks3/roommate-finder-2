@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fire, { useFirestoreDoc } from './fire';
+import { Card } from '@material-ui/core';
 
 function RoomBox(props) {
   const room = props.room;
@@ -11,12 +12,10 @@ function RoomBox(props) {
     >
       <div>
         <h1>Room</h1>
-        <p>{room.address}</p>
+        <p>Address: {room.address}</p>
         <p>Rent: {room.rent}</p>
+
       </div>
-      <aside>
-        <p>Hello</p>
-      </aside>
     </div>
   );
 }
@@ -24,6 +23,12 @@ function RoomBox(props) {
 function RoomList(props) {
   const ref = fire.firestore().collection('rooms');
   const { isLoading, data } = useFirestoreDoc(ref);
+
+  if (isLoading) {
+    return (
+      <p>LOADING</p>
+    );
+  }
 
   return (
     data &&
