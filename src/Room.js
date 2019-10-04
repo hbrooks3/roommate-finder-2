@@ -9,7 +9,7 @@ function Comment(props) {
   return (
     <div className="Comment">
       <p>{data.comment}</p>
-      <p className='text small'>Posted By {data.uid} At {Date(data.time)}</p>
+      <p className='text small'>Posted By {data.uid}</p>
       <p></p>
     </div>
   );
@@ -22,7 +22,7 @@ function Comment(props) {
  */
 function CommentSection(props) {
   const roomID = props.roomID;
-  const ref = fire.firestore().collection('comments').where('room', '==', roomID);
+  const ref = fire.firestore().collection('comments').where('room', '==', roomID).orderBy('time');
   const { dataIsLoading, data } = useFirestoreDoc(ref);
   const user = useUser();
 
@@ -32,7 +32,7 @@ function CommentSection(props) {
       <p>Comments:</p>
       <ul>
       {data.docs.map(
-        doc => <li><Comment key={doc.id} doc={doc}/></li>
+        doc => <li key={doc.id}><Comment  doc={doc}/></li>
       )}
       </ul>
       <CommentForm roomID={roomID} uid={user.uid}/>

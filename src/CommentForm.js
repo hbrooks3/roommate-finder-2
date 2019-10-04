@@ -10,7 +10,6 @@ class CommentForm extends React.Component {
     super();
     this.state = {
       comment: ``,
-      dateTime: ``,
     };
   }
 
@@ -23,9 +22,6 @@ class CommentForm extends React.Component {
   addComment = e => {
     e.preventDefault();
     const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     const commentRef = db.collection(`comments`).add({
       room: this.props.roomID,
       time: Date.now(),
@@ -34,7 +30,6 @@ class CommentForm extends React.Component {
     });
     this.setState({
       comment: ``,
-      dateTime: ``,
     });
   };
   
