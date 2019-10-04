@@ -28,7 +28,7 @@ class RoomForm extends React.Component {
     const db = fire.firestore();
     const commentRef = db.collection(`rooms`).add({
         address: this.state.address,
-        rent: this.state.rent,
+        rent: Number(this.state.rent),
         description: this.state.description,
         shared: this.state.shared,
         sex: this.state.sex,

@@ -3,10 +3,17 @@ import './App.css';
 import { useUser, SignInScreen } from './fire';
 import RoomList from './Room';
 import RoomForm from './RoomForm';
+import useForm from './Form';
 
 function App() {
   const user = useUser();
-  const [maxRent, setMaxRent] = useState(null);
+  const [maxRent, setMaxRent] = useState(999);
+  const {inputs, handleInputChange, handleSubmit} = useForm(updateFilter);
+
+  function updateFilter() {
+    console.log(`Filtering by ${inputs.maxRent}`);
+    setMaxRent(inputs.maxRent);
+  }
 
   return (
     <div className="App">
@@ -28,16 +35,21 @@ function App() {
         }
         <div className="YellowBox">
           <h1>Filter</h1>
-          <div>
+          <form onSubmit={handleSubmit}>
             <label>Max Rent </label>
             <input
-              type='number'
+              required
+              type="number"
+              name="maxRent"
+              onChange={handleInputChange}
+              value={inputs.maxRent}
             />
-          </div>
+            <button type="submit">Filter</button>
+          </form>
         </div>
       </div>
       <div className='column main'>
-        <RoomList />
+        <RoomList maxRent={maxRent}/>
       </div>
     </div>
   );

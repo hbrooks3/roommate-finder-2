@@ -58,7 +58,7 @@ function RoomCard(props) {
 }
 
 function RoomList(props) {
-  const ref = fire.firestore().collection('rooms');
+  const ref = fire.firestore().collection('rooms').where('rent','<',props.maxRent);
   const { isLoading, data } = useFirestoreDoc(ref);
 
   if (isLoading) {
