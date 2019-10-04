@@ -43,3 +43,12 @@
     width: 100%;
   }
 }
+
+.text.small {
+  font-size: calc(10px + 0.5vmin);
+  color: grey;
+}
+
+.Comment {
+  padding-left: 10px;
+}

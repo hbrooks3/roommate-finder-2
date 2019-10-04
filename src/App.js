@@ -13,7 +13,7 @@ function App() {
           Roommate Finder
         </h1>
       </header>
-      <column className='column side'>
+      <div className='column side'>
         <div className="YellowBox">
           <SignInScreen />
         </div>
@@ -23,10 +23,10 @@ function App() {
         <div className="YellowBox">
           <p>Filter Options</p>
         </div>
-      </column>
-      <column className='column main'>
+      </div>
+      <div className='column main'>
         <RoomList />
-      </column>
+      </div>
     </div>
   );
 }

@@ -2,19 +2,25 @@ import React, { useState, useEffect } from 'react';
 import fire, { useFirestoreDoc, useAuth } from './fire';
 import './App.css';
 import CommentForm from './CommentForm'
+import { useComment } from './Data'
 
 function Comment(props) {
-  const time = props.time;
-  const comment = props.comment;
+  const data = props.doc.data();
 
   return (
-    <div>
-      <p>{comment}</p>
-      <p>Posted At: {time}</p>
+    <div className="Comment">
+      <p>{data.comment}</p>
+      <p className='text small'>Posted By {data.uid} At {Date(data.time)}</p>
+      <p></p>
     </div>
   );
 }
 
+
+/**
+ * 
+ * <p>{doc.data().comment}</p>
+ */
 function CommentSection(props) {
   const roomID = props.roomID;
   const ref = fire.firestore().collection('comments').where('room', '==', roomID);
@@ -25,9 +31,11 @@ function CommentSection(props) {
     data &&
     <div>
       <p>Comments:</p>
-      {data.docs.map(doc => 
-        <p key={doc.id}>{doc.data().comment}</p>
+      <ul>
+      {data.docs.map(
+        doc => <li><Comment key={doc.id} doc={doc}/></li>
       )}
+      </ul>
       <CommentForm roomID={roomID} uid={user.uid}/>
     </div>
   );
@@ -42,12 +50,12 @@ function RoomCard(props) {
       <h1>Room</h1>
       <p>{room.address}</p>
       <p>Rent: ${room.rent}/month</p>
-      <p>Description: ${room.description}</p>
+      <p>Description: {room.description}</p>
       <p>Shared: {room.shared ? `yes` : `no`}</p>
       <p>Perfered Sex: {
         room.sex == null ? 'not specified' : room.sex
       }</p>
-      <p>{user == null ? '' : <CommentSection roomID={props.roomID}/>}</p>
+      <div>{user == null ? '' : <CommentSection roomID={props.roomID}/>}</div>
     </div>
   );
 }
@@ -65,9 +73,9 @@ function RoomList(props) {
   return (
     data &&
     <div>
-      {data.docs.map(doc => 
-        <RoomCard room={doc.data()} roomID={doc.id} />)
-      }
+      {data.docs.map(
+        doc => <RoomCard room={doc.data()} roomID={doc.id} key={doc.id}/>
+      )}
     </div>
   );
 }
