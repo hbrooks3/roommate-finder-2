@@ -15,13 +15,12 @@
 }
 
 .RoomBox {
-  float: right;
-  background-color: #FFF2CC;
+  background-color: white;
   border: 1pt solid #D6B656;
   padding: 5px 5px 5px 5px;
   margin: 5px 5px 5px 5px; 
   width: 500px;
-  text-align: left;
+  text-align: center;
   min-height: 40vh;
   max-height: 40vh;
 }

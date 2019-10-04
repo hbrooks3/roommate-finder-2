@@ -18,13 +18,12 @@ function App() {
         <h1>
           Roommate Finder
         </h1>
-        <h2>
-          Hi {user && user.displayName}
-        </h2>
         <SignInScreen />
       </header>
+      <p>
+        {/* User Signed In: {user && user.isSignedIn()} */}
+      </p>
       <RoomList />
-      
     </div>
   );
 }
