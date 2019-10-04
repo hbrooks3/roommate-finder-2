@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import fire, { useFirestoreDoc, useAuth, SignInScreen } from './fire';
+import { useUser, SignInScreen } from './fire';
 import RoomList from './Room';
 
 function App() {
-  const { isLoading, user } = useAuth(fire.auth());
+  const user = useUser();
 
   return (
     <div className="App">

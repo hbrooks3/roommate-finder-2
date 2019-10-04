@@ -21,6 +21,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const fire = firebase.initializeApp(firebaseConfig);
 
+/**
+ * Hook for snapshot of firebase.
+ * Adapted from "useFirestoreDoc" code at: https://medium.com/@sampsonjoliver/firebase-meet-react-hooks-db589c625106
+ */
 function useFirestoreDoc(ref) {
   const [docState, setDocState] = useState({
     isLoading: true,
@@ -39,26 +43,27 @@ function useFirestoreDoc(ref) {
   return docState;
 }
 
-
 /**
- * Example Usuage:
- * const { isLoading, user } = useAuth(fire.auth());
+ * Returns current user or null if no user.
+ * Adapted from "useAuth" code at: https://medium.com/@sampsonjoliver/firebase-meet-react-hooks-db589c625106
  */
-function useAuth(auth) {
-  const [authState, setState] = useState({
-    isLoading: true,
-    user: null
-  });
-  
+function useUser() {
+  const [user, setUser] = useState(null);
+  const auth = fire.auth();
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(authState =>
-      setState({ isLoading: false, user: authState })
+    const unsubscribe = auth.onAuthStateChanged(user =>
+      setUser(user)
     );
     return unsubscribe;
   }, [auth]);
-  return authState;
+  return user;
 }
 
+/**
+ * Implements sign-in with Google account.
+ * Code taken from example code: https://github.com/firebase/firebaseui-web
+ */
 class SignInScreen extends React.Component {
 
   // The component's Local state.
@@ -111,4 +116,4 @@ class SignInScreen extends React.Component {
 }
 
 export default fire;
-export { useFirestoreDoc, useAuth, SignInScreen};
+export { useFirestoreDoc, SignInScreen, useUser};

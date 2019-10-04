@@ -1,6 +1,10 @@
 import React from 'react';
 import fire from './fire';
 
+/**
+ * Adapted from code at: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
+ * TODO: Refactor into reusable form using hooks.
+ */
 class CommentForm extends React.Component {
   constructor() {
     super();

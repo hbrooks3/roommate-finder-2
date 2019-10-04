@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import fire, { useFirestoreDoc, useAuth } from './fire';
+import fire, { useFirestoreDoc, useUser } from './fire';
 import './App.css';
 import CommentForm from './CommentForm'
-import { useComment } from './Data'
 
 function Comment(props) {
   const data = props.doc.data();
@@ -25,7 +24,7 @@ function CommentSection(props) {
   const roomID = props.roomID;
   const ref = fire.firestore().collection('comments').where('room', '==', roomID);
   const { dataIsLoading, data } = useFirestoreDoc(ref);
-  const { userIsLoading, user } = useAuth(fire.auth());
+  const user = useUser();
 
   return (
     data &&
@@ -43,7 +42,7 @@ function CommentSection(props) {
 
 function RoomCard(props) {
   const room = props.room;
-  const {loadind, user} = useAuth(fire.auth());
+  const user = useUser();
 
   return (
     <div className="YellowBox">
