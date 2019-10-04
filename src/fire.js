@@ -39,6 +39,11 @@ function useFirestoreDoc(ref) {
   return docState;
 }
 
+
+/**
+ * Example Usuage:
+ * const { isLoading, user } = useAuth(fire.auth());
+ */
 function useAuth(auth) {
   const [authState, setState] = useState({
     isLoading: true,

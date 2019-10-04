@@ -4,9 +4,6 @@ import fire, { useFirestoreDoc, useAuth, SignInScreen } from './fire';
 import RoomList from './Room';
 
 function App() {
-  const { isLoading, user } = useAuth(fire.auth());
-  const classes = useStyles();
-
   return (
     <div className="App">
       <header className="App-header">
