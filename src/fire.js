@@ -2,7 +2,7 @@
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
 import React, { useState, useEffect } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'; 
 
 // Add the Firebase services that you want to use
 import "firebase/auth";

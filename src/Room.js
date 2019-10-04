@@ -1,66 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import fire, { useFirestoreDoc, useAuth } from './fire';
-import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
-
-const useStyles = makeStyles({
-  card: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 24,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
-// function CommentForm(props) {
-
-// }
+import CommentForm from './CommentForm'
 
 function Comment(props) {
   const time = props.time;
   const comment = props.comment;
 
   return (
-    <div></div>
+    <div>
+      <p>{comment}</p>
+      <p>Posted At: {time}</p>
+    </div>
   );
 }
 
 function CommentSection(props) {
   const roomID = props.roomID;
   const ref = fire.firestore().collection('comments').where('room', '==', roomID);
-  const { isLoading, data } = useFirestoreDoc(ref);
+  const { dataIsLoading, data } = useFirestoreDoc(ref);
+  const { userIsLoading, user } = useAuth(fire.auth());
 
   return (
     data &&
     <div>
       <p>Comments:</p>
       {data.docs.map(doc => 
-        <p>{doc.data().comment}</p>
+        <p key={doc.id}>{doc.data().comment}</p>
       )}
-      <form>
-        <input type="text" name="comment" required />
-        <button type="submit">Post</button>
-      </form>
+      <CommentForm roomID={roomID} uid={user.uid}/>
     </div>
   );
 }
 
 function RoomCard(props) {
   const room = props.room;
-  const classes = useStyles();
   const {loadind, user} = useAuth(fire.auth());
 
   return (
-    <div className="RoomBox">
+    <div className="YellowBox">
       <h1>Room</h1>
       <p>{room.address}</p>
       <p>Rent: ${room.rent}/month</p>

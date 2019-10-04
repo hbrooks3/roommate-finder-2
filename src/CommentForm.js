@@ -2,13 +2,12 @@ import React from 'react';
 import fire from './fire';
 
 class CommentForm extends React.Component {
-  constructor(roomID) {
+  constructor() {
     super();
     this.state = {
       comment: ``,
       dateTime: ``,
     };
-    this.room = roomID;
   }
 
   updateInput = e => {
@@ -17,48 +16,32 @@ class CommentForm extends React.Component {
     });
   }
 
-  addUser = e => {
+  addComment = e => {
     e.preventDefault();
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true
     });
-    const userRef = db.collection(`users`).add({
-      room: '',
+    const commentRef = db.collection(`comments`).add({
+      room: this.props.roomID,
       time: Date.now(),
-      uid: '',
+      uid: this.props.uid,
       comment: this.state.comment
     });
     this.setState({
-      fullname: ``,
-      email: ``,
+      comment: ``,
+      dateTime: ``,
     });
   };
   
   render() {
     return (
-      <form onSubmit={this.addUser}>
-        <input
-          type="text"
-          name="fullname"
-          placeholder="Full name"
-          onChange={this.updateInput}
-          value={this.state.fullname}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Full name"
-          onChange={this.updateInput}
-          value={this.state.email}
-        />
-        <button type="submit">Submit</button>
-        <label>Comment</label>
+      <form onSubmit={this.addComment}>
         <input
           type="text"
           name="comment"
           onChange={this.updateInput}
-          value={this.state.email}
+          value={this.state.comment}
           required
         />
         <button type="submit">Post</button>

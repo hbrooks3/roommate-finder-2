@@ -4,7 +4,6 @@
 
 .App-header {
   background-color: #FFF2CC;
-  border: 1pt solid #D6B656;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -14,21 +13,14 @@
   color: black;
 }
 
-.RoomBox {
+.YellowBox {
   background-color: #FFF2CC;
-  border: 1pt solid #D6B656;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 50px;
   margin: 10px 10px 10px 10px;
 }
 
 .firebaseUi {
   min-width: 250px;
-}
-
-.footer {
-  background-color: #F1F1F1;
-  text-align: center;
-  padding: 10px;
 }
 
 .column {
@@ -41,7 +33,7 @@
 }
 
 /* Middle column */
-.column.middle {
+.column.main {
   width: 70%;
 }
 
@@ -50,26 +42,4 @@
   .column.side, .column.middle {
     width: 100%;
   }
-}
-
-/* The navbar container */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-/* Navbar links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Links - change color on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
 }

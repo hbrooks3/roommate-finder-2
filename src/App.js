@@ -4,6 +4,8 @@ import fire, { useFirestoreDoc, useAuth, SignInScreen } from './fire';
 import RoomList from './Room';
 
 function App() {
+  const { isLoading, user } = useAuth(fire.auth());
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,17 +14,17 @@ function App() {
         </h1>
       </header>
       <column className='column side'>
-        <div className="RoomBox">
+        <div className="YellowBox">
           <SignInScreen />
         </div>
-        <div className="RoomBox">
+        {user && <div className="YellowBox">
           <button>Add Room</button>
-        </div>
-        <div className="RoomBox">
+        </div>}
+        <div className="YellowBox">
           <p>Filter Options</p>
         </div>
       </column>
-      <column className='column middle'>
+      <column className='column main'>
         <RoomList />
       </column>
     </div>
