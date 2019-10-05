@@ -64,3 +64,12 @@
   font-size: 16px;
   margin-top: 10pt;
 }
+
+.post {
+  background-color: #555555;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}

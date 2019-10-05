@@ -40,15 +40,17 @@ function App() {
         <div className="YellowBox">
           <h1>Filter</h1>
           <form onSubmit={handleSubmit}>
-            <label>Max Rent </label>
-            <input
-              required
-              type="number"
-              name="maxRent"
-              onChange={handleInputChange}
-              value={inputs.maxRent}
-            />
-            <button type="submit">Reset</button>
+            <div>
+              <label>Max Rent </label>
+              <input
+                required
+                type="number"
+                name="maxRent"
+                onChange={handleInputChange}
+                value={inputs.maxRent}
+              />
+            </div>
+            <button className='button' type="submit">Reset</button>
           </form>
         </div>
       </div>

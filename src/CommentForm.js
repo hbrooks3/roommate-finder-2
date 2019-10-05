@@ -1,5 +1,6 @@
 import React from 'react';
 import fire from './fire';
+import './App.css';
 
 /**
  * Adapted from code at: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
@@ -43,7 +44,7 @@ class CommentForm extends React.Component {
           value={this.state.comment}
           required
         />
-        <button type="submit">Post</button>
+        <button className='post' type="submit">Post</button>
       </form>
       );
     }
