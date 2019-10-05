@@ -22,7 +22,7 @@ class CommentForm extends React.Component {
   addComment = e => {
     e.preventDefault();
     const db = fire.firestore();
-    const commentRef = db.collection(`comments`).add({
+    db.collection(`comments`).add({
       room: this.props.roomID,
       time: Date.now(),
       uid: this.props.uid,

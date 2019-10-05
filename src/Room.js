@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import fire, { useFirestoreDoc, useUser } from './fire';
 import './App.css';
-import CommentForm from './CommentForm'
+import CommentForm from './CommentForm';
 
 function Comment(props) {
   const data = props.doc.data();
@@ -10,7 +10,7 @@ function Comment(props) {
   return (
     <div className="Comment">
       <p>{data.comment}</p>
-      {user && user.uid == data.uid &&
+      {user && user.uid === data.uid &&
         <p className='text small'>Posted By You</p>
       }
       <p></p>
@@ -21,7 +21,7 @@ function Comment(props) {
 function CommentSection(props) {
   const roomID = props.roomID;
   const ref = fire.firestore().collection('comments').where('room', '==', roomID).orderBy('time');
-  const { dataIsLoading, data } = useFirestoreDoc(ref);
+  const { isLoading, data } = useFirestoreDoc(ref);
   const user = useUser();
 
   return (
@@ -35,6 +35,37 @@ function CommentSection(props) {
       </ul>
       <CommentForm roomID={roomID} uid={user.uid}/>
     </div>
+  );
+}
+
+function FavoriteButton(props) {
+  const roomID = props.roomID;
+  const uid = props.uid;
+  const ref = fire.firestore().collection('favorites').where('uid', '==', uid).where('room', '==', roomID);
+  const {isLoading, data} = useFirestoreDoc(ref);
+
+  function addFavorite() {
+    fire.firestore().collection('favorites').add({
+      room: roomID,
+      uid: uid,
+    });
+  }
+
+  function removeFavorite() {
+    ref.get().then(doc => {
+      doc.forEach(doc =>{
+        doc.ref.delete();
+      });
+    });
+  }
+
+  if (!isLoading && data.size > 0) {
+    return(
+      <button className='button' onClick={removeFavorite}>Unfavorite</button> 
+    );
+  }
+  return(
+    <button className='button' onClick={addFavorite}>Favorite</button> 
   );
 }
 
@@ -52,13 +83,20 @@ function RoomCard(props) {
       <p>Perfered Sex: {
         room.sex == null ? 'not specified' : room.sex
       }</p>
-      <div>{user == null ? '' : <CommentSection roomID={props.roomID}/>}</div>
+      <div>
+        {user &&
+         <CommentSection roomID={props.roomID}/>
+        }
+      </div>
+        {user &&
+          <FavoriteButton roomID={props.roomID} uid={user.uid}/>
+        }
     </div>
   );
 }
 
 function RoomList(props) {
-  const ref = fire.firestore().collection('rooms').where('rent','<',props.maxRent);
+  const ref = fire.firestore().collection('rooms');//.where('rent','<',props.maxRent);
   const { isLoading, data } = useFirestoreDoc(ref);
 
   if (isLoading) {

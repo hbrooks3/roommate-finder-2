@@ -1,5 +1,5 @@
 import React from 'react';
-import fire, { useUser } from './fire';
+import fire from './fire';
 
 /**
  * Adapted from code at: https://medium.com/get-it-working/get-googles-firestore-working-with-react-c78f198d2364
@@ -26,7 +26,7 @@ class RoomForm extends React.Component {
   addRoom = e => {
     e.preventDefault();
     const db = fire.firestore();
-    const commentRef = db.collection(`rooms`).add({
+    db.collection(`rooms`).add({
         address: this.state.address,
         rent: Number(this.state.rent),
         description: this.state.description,
@@ -82,6 +82,7 @@ class RoomForm extends React.Component {
             name="shared"
             onChange={this.updateInput}
             value={this.state.shared}
+            id="box27"
             />
         </div>
         <div>

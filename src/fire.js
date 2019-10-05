@@ -35,7 +35,7 @@ function useFirestoreDoc(ref) {
     return ref.onSnapshot(doc => {
       setDocState({
         isLoading: false,
-        data: doc      
+        data: doc,
       });
     });
   }, []);
@@ -46,6 +46,7 @@ function useFirestoreDoc(ref) {
 /**
  * Returns current user or null if no user.
  * Adapted from "useAuth" code at: https://medium.com/@sampsonjoliver/firebase-meet-react-hooks-db589c625106
+ * Gist: https://gist.github.com/sampsonjoliver/057ddcfc78c4d74d359eeb79a37584ec.js
  */
 function useUser() {
   const [user, setUser] = useState(null);
@@ -109,7 +110,7 @@ class SignInScreen extends React.Component {
     return (
       <div>
         <p>Welcome {fire.auth().currentUser.displayName}! You are now signed-in!</p>
-        <a onClick={() => fire.auth().signOut()}>Sign-out</a>
+        <button className='button' onClick={() => fire.auth().signOut()}>Sign-out</button>
       </div>
     );
   }
