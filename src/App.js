@@ -4,15 +4,20 @@ import { useUser, SignInScreen } from './fire';
 import RoomList from './Room';
 import RoomForm from './RoomForm';
 import useForm from './Form';
+import fire, { useFirestoreDoc } from "./fire";
 
 function App() {
   const user = useUser();
-  const [maxRent, setMaxRent] = useState(999);
-  const {inputs, handleInputChange, handleSubmit} = useForm(updateFilter);
+  
+  const defaults = {
+    maxRent: 999,
+    favorites: false,
+  }
+  
+  const {inputs, handleInputChange, handleSubmit, setInputs} = useForm(defaults, resetDefaults);
 
-  function updateFilter() {
-    console.log(`Filtering by ${inputs.maxRent}`);
-    setMaxRent(inputs.maxRent);
+  function resetDefaults() {
+    setInputs(defaults);
   }
 
   return (
@@ -44,12 +49,15 @@ function App() {
               onChange={handleInputChange}
               value={inputs.maxRent}
             />
-            <button type="submit">Filter</button>
+            <button type="submit">Reset</button>
           </form>
         </div>
       </div>
       <div className='column main'>
-        <RoomList maxRent={maxRent}/>
+        <RoomList
+          maxRent={inputs.maxRent}
+          filter={inputs}
+        />
       </div>
     </div>
   );

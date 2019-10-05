@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import fire, { useFirestoreDoc, useUser } from './fire';
 import './App.css';
 import CommentForm from './CommentForm';
@@ -73,7 +73,7 @@ function RoomCard(props) {
   const room = props.room;
   const user = useUser();
 
-  return (
+  return (room.rent < props.filter.maxRent &&
     <div className="YellowBox">
       <h1>Room</h1>
       <p>Address: {room.address}</p>
@@ -96,8 +96,12 @@ function RoomCard(props) {
 }
 
 function RoomList(props) {
-  const ref = fire.firestore().collection('rooms');//.where('rent','<',props.maxRent);
+  const ref = fire.firestore().collection('rooms').where('rent','<',props.maxRent);
   const { isLoading, data } = useFirestoreDoc(ref);
+
+  useEffect(() => {
+    console.log(`max rent prop: ${props.maxRent}`)
+  })
 
   if (isLoading) {
     return (
@@ -109,7 +113,7 @@ function RoomList(props) {
     data &&
     <div>
       {data.docs.map(
-        doc => <RoomCard room={doc.data()} roomID={doc.id} key={doc.id}/>
+        doc => <RoomCard filter={props.filter} room={doc.data()} roomID={doc.id} key={doc.id}/>
       )}
     </div>
   );
