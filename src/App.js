@@ -4,7 +4,6 @@ import { useUser, SignInScreen } from './fire';
 import RoomList from './Room';
 import RoomForm from './RoomForm';
 import useForm from './Form';
-import fire, { useFirestoreDoc } from "./fire";
 
 function App() {
   const user = useUser();

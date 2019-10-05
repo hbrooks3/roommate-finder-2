@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import fire, { useFirestoreDoc, useUser } from './fire';
 import './App.css';
 import CommentForm from './CommentForm';
@@ -98,10 +98,6 @@ function RoomCard(props) {
 function RoomList(props) {
   const ref = fire.firestore().collection('rooms').where('rent','<',props.maxRent);
   const { isLoading, data } = useFirestoreDoc(ref);
-
-  useEffect(() => {
-    console.log(`max rent prop: ${props.maxRent}`)
-  })
 
   if (isLoading) {
     return (
